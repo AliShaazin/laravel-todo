@@ -1,9 +1,10 @@
 "use client";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Task } from "../../lib/types";
+import { Task } from "../lib/types";
 import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { formatTime } from "@/lib/helperFunctions";
+import { clientAuthFetch } from "@/lib/helperFunctions";
 
 type TaskCardProps = {
   task: Task;
@@ -13,16 +14,14 @@ const TaskCard = ({ task }: TaskCardProps) => {
   const router = useRouter();
 
   const handleDelete = async (id: number) => {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    await fetch(`${API_URL}/tasks/${id}`, {
+    await clientAuthFetch(`/tasks/${id}`, {
       method: "DELETE",
     });
     router.refresh();
   };
 
   const handleMarkedDone = async (checked: boolean) => {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    await fetch(`${API_URL}/tasks/${task.id}/complete`, {
+    await clientAuthFetch(`/tasks/${task.id}/complete`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +30,6 @@ const TaskCard = ({ task }: TaskCardProps) => {
     });
     router.refresh();
   };
-
   return (
     <section className="h-50 border rounded-lg border-gray-500 p-4 w-full flex flex-col justify-between relative">
       <div className="flex flex-col gap-2">

@@ -8,14 +8,14 @@ class TaskController extends Controller
 {
 
     //get 
-    public function getAllTasks()
+    public function index()
     {
     $tasks = Task::all();
     return response()->json(['tasks' => $tasks]);
     }
 
     // post 
-    public function addTask(Request $request)
+    public function store(Request $request)
     {
     $validated = $request->validate([
         'title' => 'required|string',
@@ -26,7 +26,7 @@ class TaskController extends Controller
     }
 
     //put
-    public function updateTask(Request $request, $id)
+    public function update(Request $request, $id)
     {
       $validated = $request->validate([
           'title' => 'required|string',
@@ -38,7 +38,7 @@ class TaskController extends Controller
     }
 
     //delete 
-    public function deleteTask($id)
+    public function destroy($id)
     {
         Task::destroy($id);
         return response()->json(['success' => 'Task deleted successfully']);

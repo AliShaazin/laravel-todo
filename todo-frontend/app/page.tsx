@@ -1,10 +1,18 @@
-import Header from "./components/Header";
-import TaskContainer from "./components/TaskContainer";
-import TaskCard from "./components/TaskCard";
+import Header from "../components/Header";
+import TaskContainer from "../components/TaskContainer";
+import TaskCard from "../components/TaskCard";
 import { getTasks } from "../actions/actions";
-import AddTaskPlaceholder from "./components/AddTaskPlaceholder";
+import AddTaskPlaceholder from "../components/AddTaskPlaceholder";
+import { Task } from "@/lib/types";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
+  const cookieStore = cookies();
+  const token = (await cookieStore).get("access_token");
+  if (!token) {
+    redirect("/login");
+  }
   const tasks = await getTasks();
 
   return (
@@ -14,7 +22,7 @@ export default async function Home() {
         description="Manage your tasks efficiently"
       />
       <TaskContainer>
-        {tasks.map((task) => (
+        {tasks.map((task: Task) => (
           <TaskCard key={task.id} task={task} />
         ))}
         <AddTaskPlaceholder />
