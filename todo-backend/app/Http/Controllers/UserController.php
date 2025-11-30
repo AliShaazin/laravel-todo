@@ -17,6 +17,7 @@ class UserController extends Controller
     // create user
     public function addUser(Request $request)
     {
+          try {
         $validated = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users,email',
@@ -24,6 +25,12 @@ class UserController extends Controller
         ]);
         $user = User::create($validated);
         return response()->json(['success' => 'User created successfully', 'user' => $user]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+        return response()->json([
+            'error' => 'Validation failed',
+            'messages' => $e->errors()
+        ], 422);
+        }
     }
 
 
