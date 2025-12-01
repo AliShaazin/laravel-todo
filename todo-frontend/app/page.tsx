@@ -1,5 +1,5 @@
+import Header from "../components/Header";
 import { getTasks } from "../actions/actions";
-import Header from "@/components/Header";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import TaskClientWrapper from "@/components/TaskClienWrapper";
@@ -13,7 +13,7 @@ export default async function Home() {
   const tasks = await getTasks();
 
   return (
-    <section className="min-h-screen w-full flex flex-col items-center">
+    <section className="min-h-screen">
       <Header
         title="Task Manager V1"
         description="Manage your tasks efficiently"

@@ -1,6 +1,6 @@
 "use client";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Task } from "@/lib/types";
+import { Task } from "../lib/types";
 import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { formatTime } from "@/lib/helperFunctions";

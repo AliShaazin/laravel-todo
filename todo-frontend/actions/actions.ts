@@ -1,5 +1,5 @@
 "use server";
-import { Task, User } from "@/lib/types";
+import { Task } from "@/lib/types";
 import { TaskFormState } from "@/lib/types";
 import { LoginFormState } from "@/lib/types";
 import { cookies } from "next/headers";
@@ -8,12 +8,6 @@ import { RegisterFormState } from "@/lib/types";
 import { authFetch } from "@/lib/apiHelper";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-export async function getUsers(): Promise<User[]> {
-  const res = await authFetch("/users");
-  const data = await res.json();
-  return data.users;
-}
 
 export async function getTasks(): Promise<Task[]> {
   const res = await authFetch("/tasks");

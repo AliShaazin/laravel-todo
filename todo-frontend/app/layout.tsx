@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/global/Sidebar";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -21,14 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lato.variable} antialiased`}>
-        <div className="grid grid-cols-12 w-full">
-          <section className="col-span-2">
-            <Sidebar />
-          </section>
-          <section className="col-span-10">{children}</section>
-        </div>
-      </body>
+      <body className={`${lato.variable} antialiased`}>{children}</body>
     </html>
   );
 }
