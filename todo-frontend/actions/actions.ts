@@ -46,6 +46,7 @@ export async function handleAddTask(
     body: JSON.stringify({ title: name, description: description }),
   });
 
+  console.log("Add Task Response Status:", res);
   if (!res.ok) {
     return {
       name: name,
@@ -114,7 +115,8 @@ export async function handleLogin(
   const cookie = await cookies();
   cookie.set("access_token", data.access_token, {
     path: "/",
-    httpOnly: false, // set to false because without it cant access cookie on client-side
+    secure: false, // TODO: set to true, figure out why it doesnt set cookie on safari when set to true
+    httpOnly: false, // TODO: set to true, and figure out a way to send cookie using credentials include
     sameSite: "lax",
     maxAge: 60 * 60 * 2,
   });
@@ -212,7 +214,8 @@ export async function handleRegister(
   const cookie = await cookies();
   cookie.set("access_token", data.access_token, {
     path: "/",
-    httpOnly: false, // set to false because without it cant access cookie on client-side
+    secure: false, // TODO: set to true, figure out why it doesnt set cookie on safari when set to true
+    httpOnly: false, // TODO: set to true, and figure out a way to send cookie using credentials include
     sameSite: "lax",
     maxAge: 60 * 60 * 2,
   });

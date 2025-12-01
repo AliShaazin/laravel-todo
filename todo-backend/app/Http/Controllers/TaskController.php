@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Events\TaskChanged;
 
 class TaskController extends Controller
 {
@@ -22,6 +23,7 @@ class TaskController extends Controller
         'description' => 'required|string',
     ]);
       $task = Task::create($validated);
+      broadcast(new TaskChanged(Task::all()));
       return response()->json(['success' => 'Task created successfully', 'task' => $task]);
     }
 
@@ -34,6 +36,7 @@ class TaskController extends Controller
       ]);
       $task = Task::findOrFail($id);
       $task->update($validated);
+      broadcast(new TaskChanged(Task::all()));
       return response()->json(['success' => 'Task updated successfully', 'task' => $task]);
     }
 
@@ -41,6 +44,7 @@ class TaskController extends Controller
     public function destroy($id)
     {
         Task::destroy($id);
+        broadcast(new TaskChanged(Task::all()));
         return response()->json(['success' => 'Task deleted successfully']);
     }
 
@@ -50,6 +54,7 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         $task->is_completed = !$task->is_completed; 
         $task->save();
+        broadcast(new TaskChanged(Task::all()));
         return response()->json(['message' => 'Task marked as completed', 'task' => $task]);
     }
 }
