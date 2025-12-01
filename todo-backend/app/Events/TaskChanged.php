@@ -14,7 +14,7 @@ class TaskChanged implements ShouldBroadcast
 
     public $tasks;
 
-    public function __construct($tasks)
+    public function __construct($tasks, $user)
     {
         $this->tasks = $tasks;
     }

@@ -1,6 +1,6 @@
 "use client";
 import TaskContainer from "./TaskContainer";
-import TaskCard from "./TaskCard";
+import TaskCard from "./cards/TaskCard";
 import AddTaskPlaceholder from "./AddTaskPlaceholder";
 import { Task } from "@/lib/types";
 import { useState, useEffect } from "react";
