@@ -1,5 +1,3 @@
-echo-server/dump.rdb
-echo-server/node_modules
 
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
@@ -43,3 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# laravel echo server
+echo-server/dump.rdb
+echo-server/node_modules
