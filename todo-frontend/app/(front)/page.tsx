@@ -1,4 +1,4 @@
-import { getTasks } from "../actions/actions";
+import { getTasks } from "../../actions/actions";
 import Header from "@/components/Header";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
